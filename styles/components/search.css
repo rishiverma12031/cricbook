@@ -1,0 +1,19 @@
+
+.search {
+    padding: 2rem 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.search__input {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    flex-grow: 1;
+    max-width: 360px;
+}
+
+.search__result {
+
+}
