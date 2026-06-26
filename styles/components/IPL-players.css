@@ -8,4 +8,8 @@
 
 .IPL-players__list {
 
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
 }
