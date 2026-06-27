@@ -23,3 +23,7 @@
     background-color: color-mix(in oklch, var(--primary), transparent 20%);
     transition: none;
 }
+
+.hidden {
+    display: none;
+}

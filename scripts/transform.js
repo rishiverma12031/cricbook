@@ -20,21 +20,21 @@ export const transformLookUpPlayer = (player) => {
 
     return {
         id: player.idPlayer,
+        name: player.strPlayer,
+        nationality: player.strNationality,
         dateOfBirth: player.dateBorn,
         placeOfBirth: player.strBirthLocation,
-        description: player.strDescriptionEN,
-        ethnicity: player.strEthnicity,
         gender: player.strGender,
+        ethnicity: player.strEthnicity,
         height: player.strHeight,
-        nationality: player.strNationality,
-        name: player.strPlayer,
+        sport: player.strSport,
+        team: player.strTeam2,
+        IPLTeam: player.strTeam,
         position: player.strPosition,
         side: player.strSide,
-        sport: player.strSport,
         status: player.strStatus,
-        IPLTeam: player.strTeam,
-        team: player.strTeam2,
-        image: player.strThumb
+        image: player.strThumb,
+        description: player.strDescriptionEN
     };
 
 }
