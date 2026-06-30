@@ -4,8 +4,9 @@ import { transformFetchPlayers, transformLookUpPlayer } from "./transform.js";
 import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
 import { renderPlayers } from "./render.js";
 import { showModal, hideModal } from "./modal.js";
+import { debounce } from "./utils.js";
 
-// const searchInput = document.querySelector(".search__input");
+const searchInput = document.querySelector(".search__input");
 // const clearSearchBtn = document.querySelector(".search__button--clear");
 // const searchResult = document.querySelector(".search__result");
 const IPLPlayersList = document.querySelector(".IPL-players__list");
@@ -44,3 +45,11 @@ IPLPlayersList.addEventListener("click", async event => {
 });
 
 modalCloseBtn.addEventListener("click", () => hideModal());
+
+searchInput.addEventListener("input", debounce(async event => {
+
+    const searchResults = await searchPlayer(event.target.value);
+
+    console.log(searchResults);
+
+}, 300))
