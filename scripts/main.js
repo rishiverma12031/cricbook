@@ -21,30 +21,6 @@ if(!players) {
 
 renderPlayers(players, IPLPlayersList);
 
-let modals = loadModals();
-
-IPLPlayersList.addEventListener("click", async event => {
-
-    if(!event.target.classList.contains("card")) return;
-
-    if(!modals.find(modal => modal.id === event.target.dataset.id)) {
-    
-        const playerDetails = transformLookUpPlayer(await lookUpPlayer(event.target.dataset.id));
-
-        saveModals([...modals, playerDetails]);
-
-        modals = loadModals();
-
-    }
-
-    const modal = modals.find(modal => modal.id === event.target.dataset.id);
-
-    console.log(modal);
-    showModal(modal);
-
-});
-
-modalCloseBtn.addEventListener("click", () => hideModal());
 
 searchInput.addEventListener("input", debounce(async event => {
 
@@ -53,3 +29,30 @@ searchInput.addEventListener("input", debounce(async event => {
     renderPlayer(player, searchResult);
 
 }, 300));
+
+
+let modals = loadModals();
+const modalHandler = async (event) => {
+
+    if(!event.target.classList.contains("card")) return;
+
+    if(!modals.find(modal => modal.id === event.target.dataset.id)) {
+    
+        const playerDetails = transformLookUpPlayer(await lookUpPlayer(event.target.dataset.id));
+
+        modals = [...modals, playerDetails];
+        
+        saveModals(modals);
+
+    }
+
+    const modal = modals.find(modal => modal.id === event.target.dataset.id);
+
+    showModal(modal);
+
+};
+
+IPLPlayersList.addEventListener("click", modalHandler);
+searchResult.addEventListener("click", modalHandler);
+
+modalCloseBtn.addEventListener("click", () => hideModal());
