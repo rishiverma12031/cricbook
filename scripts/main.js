@@ -7,7 +7,7 @@ import { showModal, hideModal } from "./modal.js";
 import { debounce } from "./utils.js";
 
 const searchInput = document.querySelector(".search__input");
-// const clearSearchBtn = document.querySelector(".search__button--clear");
+const clearSearchBtn = document.querySelector(".search__button--clear");
 const searchResult = document.querySelector(".search__result");
 const IPLPlayersList = document.querySelector(".IPL-players__list");
 const modalCloseBtn = document.querySelector(".modal__close");
@@ -29,6 +29,14 @@ searchInput.addEventListener("input", debounce(async event => {
     renderPlayer(player, searchResult);
 
 }, 300));
+
+clearSearchBtn.addEventListener("click", () => {
+    
+    searchInput.value = "";
+
+    searchResult.innerHTML = "";
+
+});
 
 
 let modals = loadModals();
