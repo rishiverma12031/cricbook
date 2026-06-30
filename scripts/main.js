@@ -2,13 +2,13 @@
 import { fetchPlayers, searchPlayer, lookUpPlayer } from "./api.js";
 import { transformFetchPlayers, transformSearchPlayer, transformLookUpPlayer } from "./transform.js";
 import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
-import { renderPlayers } from "./render.js";
+import { renderPlayers, renderPlayer } from "./render.js";
 import { showModal, hideModal } from "./modal.js";
 import { debounce } from "./utils.js";
 
 const searchInput = document.querySelector(".search__input");
 // const clearSearchBtn = document.querySelector(".search__button--clear");
-// const searchResult = document.querySelector(".search__result");
+const searchResult = document.querySelector(".search__result");
 const IPLPlayersList = document.querySelector(".IPL-players__list");
 const modalCloseBtn = document.querySelector(".modal__close");
 
@@ -48,8 +48,8 @@ modalCloseBtn.addEventListener("click", () => hideModal());
 
 searchInput.addEventListener("input", debounce(async event => {
 
-    const searchResults = transformSearchPlayer(await searchPlayer(event.target.value));
+    const player = transformSearchPlayer(await searchPlayer(event.target.value));
 
-    console.log(searchResults);
+    renderPlayer(player, searchResult);
 
 }, 300));
