@@ -1,6 +1,6 @@
 
 import { fetchPlayers, searchPlayer, lookUpPlayer } from "./api.js";
-import { transformFetchPlayers, transformLookUpPlayer } from "./transform.js";
+import { transformFetchPlayers, transformSearchPlayer, transformLookUpPlayer } from "./transform.js";
 import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
 import { renderPlayers } from "./render.js";
 import { showModal, hideModal } from "./modal.js";
@@ -48,8 +48,8 @@ modalCloseBtn.addEventListener("click", () => hideModal());
 
 searchInput.addEventListener("input", debounce(async event => {
 
-    const searchResults = await searchPlayer(event.target.value);
+    const searchResults = transformSearchPlayer(await searchPlayer(event.target.value));
 
     console.log(searchResults);
 
-}, 300))
+}, 300));

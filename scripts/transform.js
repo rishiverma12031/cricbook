@@ -10,11 +10,24 @@ export const transformFetchPlayers = (players) => {
             team: player.strTeam,
             position: player.strPosition,
             nationality: player.strNationality
-        }
+        };
 
     });
 
-}
+};
+
+export const transformSearchPlayer = (player) => {
+
+    return {
+        playerID: player.idPlayer,
+        image: player.strThumb,
+        name: player.strPlayer,
+        team: player.strTeam,
+        position: player.strPosition,
+        nationality: player.strNationality
+    };
+
+};
 
 export const transformLookUpPlayer = (player) => {
 
@@ -37,6 +50,4 @@ export const transformLookUpPlayer = (player) => {
         description: player.strDescriptionEN
     };
 
-}
-
-//write transform functions for rest 1 api call functions
+};
