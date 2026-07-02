@@ -2,7 +2,7 @@
 import { fetchPlayers, searchPlayer, lookUpPlayer } from "./api.js";
 import { transformFetchPlayers, transformSearchPlayer, transformLookUpPlayer } from "./transform.js";
 import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
-import { renderPlayers, renderPlayer } from "./render.js";
+import { renderPlayers, renderPlayer, renderSkeletonCards } from "./render.js";
 import { showModal, hideModal } from "./modal.js";
 import { debounce } from "./utils.js";
 
@@ -15,7 +15,11 @@ const modalCloseBtn = document.querySelector(".modal__close");
 let players = loadPlayers();
 
 if(!players) {
+    
+    renderSkeletonCards(IPLPlayersList, 6);
+
     players = transformFetchPlayers(await fetchPlayers());
+    
     savePlayers(players);
 }
 

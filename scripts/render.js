@@ -1,6 +1,8 @@
 
 export const renderPlayers = (players, IPLPlayersList) => {
 
+    IPLPlayersList.innerHTML = "";
+
     players.forEach(player => {
 
         const card = document.createElement("article");
@@ -66,5 +68,27 @@ export const renderPlayer = (player, searchResult) => {
 
     card.append(image, name, nationality, position, team);
     searchResult.append(card);
+
+};
+
+export const renderSkeletonCards = (container, count = 6) => {
+
+    container.innerHTML = "";
+
+    for(let i = 0; i < count; i++) {
+
+        container.insertAdjacentHTML("beforeend", 
+            `
+            <article class="card card--skeleton">
+                <div class="card__image--skeleton"></div>
+                <div class="card__name--skeleton"></div>
+                <div class="card__nationality--skeleton"></div>
+                <div class="card__position--skeleton"></div>
+                <div class="card__team--skeleton"></div>
+            </article>
+            `
+        );
+
+    };
 
 };
