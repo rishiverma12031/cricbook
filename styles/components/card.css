@@ -35,3 +35,45 @@
     font-style: italic;
     font-weight: 700;
 }
+
+
+/* Skeleton card */
+
+.card--skeleton {
+    background: #ddd;
+}
+
+.card__image--skeleton {
+    width: 100%;
+    height: 180px;
+    background: #aaa;
+    border-radius: 8px;
+}
+
+.card__name--skeleton {
+    width: 120px;
+    height: 20px;
+    background: #aaa;
+    border-radius: 4px;
+}
+
+.card__nationality--skeleton {
+    width: 100px;
+    height: 16px;
+    background: #aaa;
+    border-radius: 4px;
+}
+
+.card__position--skeleton {
+    width: 60px;
+    height: 12px;
+    background: #aaa;
+    border-radius: 4px;
+}    
+
+.card__team--skeleton {
+    width: 150px;
+    height: 18px;
+    background: #aaa;
+    border-radius: 4px;
+}
