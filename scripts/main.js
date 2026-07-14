@@ -5,6 +5,7 @@ import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
 import { renderPlayers, renderPlayer, renderSkeletonCards } from "./render.js";
 import { showModal, hideModal, showSkeletonModal, hideSkeletonModal, populateModal } from "./modal.js";
 import { debounce } from "./utils.js";
+import { showSpinner, hideSpinner } from "./spinner.js";
 
 const searchInput = document.querySelector(".search__input");
 const clearSearchBtn = document.querySelector(".search__button--clear");
@@ -28,9 +29,21 @@ renderPlayers(players, IPLPlayersList);
 
 searchInput.addEventListener("input", debounce(async event => {
 
-    const player = transformSearchPlayer(await searchPlayer(event.target.value));
+    showSpinner();
+    
+    try {
 
-    renderPlayer(player, searchResult);
+        const player = transformSearchPlayer(await searchPlayer(event.target.value));
+
+        renderPlayer(player, searchResult);
+
+    }
+
+    finally {
+
+        hideSpinner();
+
+    }
 
 }, 300));
 
