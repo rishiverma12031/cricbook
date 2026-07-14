@@ -17,7 +17,43 @@ const status = document.querySelector(".modal__status");
 const image = document.querySelector(".modal__image");
 const description = document.querySelector(".modal__description");
 
-export const showModal = (modal) => {
+export const showModal = () => modalElement.classList.remove("hidden");
+
+export const hideModal = () => modalElement.classList.add("hidden");
+
+export const showSkeletonModal = () => {
+
+    name.classList.add("skeleton-name");
+    nationality.classList.add("skeleton-text");
+    dob.classList.add("skeleton-text");
+    pob.classList.add("skeleton-text");
+    gender.classList.add("skeleton-text");
+    ethnicity.classList.add("skeleton-text");
+    height.classList.add("skeleton-text");
+    sport.classList.add("skeleton-text");
+    team.classList.add("skeleton-text");
+    image.classList.add("skeleton-image");
+    description.classList.add("skeleton-description");
+
+}
+
+export const hideSkeletonModal = () => {
+
+    name.classList.remove("skeleton-name");
+    nationality.classList.remove("skeleton-text");
+    dob.classList.remove("skeleton-text");
+    pob.classList.remove("skeleton-text");
+    gender.classList.remove("skeleton-text");
+    ethnicity.classList.remove("skeleton-text");
+    height.classList.remove("skeleton-text");
+    sport.classList.remove("skeleton-text");
+    team.classList.remove("skeleton-text");
+    image.classList.remove("skeleton-image");
+    description.classList.remove("skeleton-description");
+
+}
+
+export const populateModal = (modal) => {
 
     name.textContent = modal.name;
     nationality.textContent = modal.nationality;
@@ -36,8 +72,4 @@ export const showModal = (modal) => {
     image.alt = modal.name;
     description.textContent = modal.description;
 
-    modalElement.classList.remove("hidden");
-
 }
-
-export const hideModal = () => modalElement.classList.add("hidden");

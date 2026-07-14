@@ -3,7 +3,7 @@ import { fetchPlayers, searchPlayer, lookUpPlayer } from "./api.js";
 import { transformFetchPlayers, transformSearchPlayer, transformLookUpPlayer } from "./transform.js";
 import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
 import { renderPlayers, renderPlayer, renderSkeletonCards } from "./render.js";
-import { showModal, hideModal } from "./modal.js";
+import { showModal, hideModal, showSkeletonModal, hideSkeletonModal, populateModal } from "./modal.js";
 import { debounce } from "./utils.js";
 
 const searchInput = document.querySelector(".search__input");
@@ -48,6 +48,10 @@ const modalHandler = async (event) => {
 
     if(!event.target.classList.contains("card")) return;
 
+    showModal();
+
+    showSkeletonModal();
+
     if(!modals.find(modal => modal.id === event.target.dataset.id)) {
     
         const playerDetails = transformLookUpPlayer(await lookUpPlayer(event.target.dataset.id));
@@ -58,9 +62,11 @@ const modalHandler = async (event) => {
 
     }
 
+    hideSkeletonModal();
+
     const modal = modals.find(modal => modal.id === event.target.dataset.id);
 
-    showModal(modal);
+    populateModal(modal);
 
 };
 
