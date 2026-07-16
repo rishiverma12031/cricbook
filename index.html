@@ -20,11 +20,40 @@
         </section>
 
         <div class="spinner hidden"></div>
-        
+
         <div class="search__result"></div>
 
         <section class="IPL-players">
-            <h2>IPL Players</h2>
+            <div>
+                <h2>IPL Players</h2>
+                <div class="filters-and-sorting">
+                    <div class="filters">
+                        <p>Filter by:<p>
+                        <select class="position" name="position">
+                            <option value="all">-position-</option>
+                            <option value="Batsman">Batsman</option>
+                            <option value="Pace Bowler">Pace Bowler</option>
+                            <option value="Wicket Keeper">Wicket keeper</option>
+                            <option value="All-Rounder">All rounder</option>
+                        </select>
+                        <select class="nationality" name="nationality">
+                            <option value="all">-nationality-</option>
+                            <option value="India">India</option>
+                            <option value="Australia">Australia</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="West Indies">West Indies</option>
+                        </select>
+                    </div>
+                    <div class="sort">
+                        <p>Sort by:</p>
+                        <button class="sort--ascending button--primary">A - Z</button>
+                        <button class="sort--descending button--primary">Z - A</button>
+                    </div>
+                </div>
+            </div>
             <div class="IPL-players__list"></div>
         </section>
 
