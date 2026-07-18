@@ -12,3 +12,7 @@ export const loadModals = () => {
 };
 
 export const saveModals = (modals) => localStorage.setItem("modals", JSON.stringify(modals));
+
+export const loadFav = () => localStorage.getItem("fav") ? JSON.parse(localStorage.getItem("fav")) : [];
+
+export const saveFav = (fav) => localStorage.setItem("fav", JSON.stringify(fav));

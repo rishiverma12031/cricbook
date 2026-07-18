@@ -1,7 +1,7 @@
 
-export const renderPlayers = (players, IPLPlayersList) => {
+export const renderPlayers = (players, container) => {
 
-    IPLPlayersList.innerHTML = "";
+    container.innerHTML = "";
 
     players.forEach(player => {
 
@@ -30,8 +30,12 @@ export const renderPlayers = (players, IPLPlayersList) => {
         team.textContent = player.team;
         team.classList.add("card__team");
 
-        card.append(image, name, nationality, position, team);
-        IPLPlayersList.append(card);        
+        const addFavBtn = document.createElement("button");
+        addFavBtn.textContent = "Add to favorites";
+        addFavBtn.classList.add("card__add-fav", "button--primary");
+
+        card.append(image, name, nationality, position, team, addFavBtn);
+        container.append(card);        
  
     });
 
@@ -66,10 +70,68 @@ export const renderPlayer = (player, searchResult) => {
     team.textContent = player.team;
     team.classList.add("card__team");
 
-    card.append(image, name, nationality, position, team);
+    const addFavBtn = document.createElement("button");
+    addFavBtn.textContent = "Add to favorites";
+    addFavBtn.classList.add("card__add-fav", "button--primary");
+
+    card.append(image, name, nationality, position, team, addFavBtn);
     searchResult.append(card);
 
 };
+
+export const renderFav = (players, container) => {
+
+    container.innerHTML = "";
+
+    if(!players.length) {
+
+        const message = document.createElement("p");
+        message.textContent = "No favourites added yet. When you add some players as favourites, they will appear here.";
+        message.classList.add("no-fav-message");
+        container.append(message);
+
+        return;
+
+    };
+
+    players.forEach(player => {
+
+        const card = document.createElement("article");
+        card.classList.add("card");
+        card.dataset.id = player.playerID;
+
+        const name = document.createElement("p");
+        name.textContent = player.name;
+        name.classList.add("card__name");
+
+        const nationality = document.createElement("p");
+        nationality.textContent = player.nationality;
+        nationality.classList.add("card__nationality");
+        
+        const image = document.createElement("img");
+        image.src = player.image;
+        image.alt = player.name;
+        image.classList.add("card__image");
+               
+        const position = document.createElement("p");
+        position.textContent = player.position;
+        position.classList.add("card__position");
+        
+        const team = document.createElement("p");
+        team.textContent = player.team;
+        team.classList.add("card__team");
+
+        const removeFavBtn = document.createElement("button");
+        removeFavBtn.textContent = "Remove from favorites";
+        removeFavBtn.classList.add("card__remove-fav", "button--primary");
+
+        card.append(image, name, nationality, position, team, removeFavBtn);
+        container.append(card);
+ 
+    });
+
+};
+
 
 export const renderSkeletonCards = (container, count = 6) => {
 

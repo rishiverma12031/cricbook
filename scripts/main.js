@@ -1,8 +1,8 @@
 
 import { fetchPlayers, searchPlayer, lookUpPlayer } from "./api.js";
 import { transformFetchPlayers, transformSearchPlayer, transformLookUpPlayer } from "./transform.js";
-import { loadPlayers, savePlayers, loadModals, saveModals } from "./storage.js";
-import { renderPlayers, renderPlayer, renderSkeletonCards } from "./render.js";
+import { loadPlayers, savePlayers, loadModals, saveModals, loadFav, saveFav } from "./storage.js";
+import { renderPlayers, renderPlayer, renderSkeletonCards, renderFav } from "./render.js";
 import { showModal, hideModal, showSkeletonModal, hideSkeletonModal, populateModal } from "./modal.js";
 import { debounce } from "./utils.js";
 import { showSpinner, hideSpinner } from "./spinner.js";
@@ -13,6 +13,7 @@ const searchInput = document.querySelector(".search__input");
 const clearSearchBtn = document.querySelector(".search__button--clear");
 const searchResult = document.querySelector(".search__result");
 const IPLPlayersList = document.querySelector(".IPL-players__list");
+const favList = document.querySelector(".fav__list");
 const modalCloseBtn = document.querySelector(".modal__close");
 const filters = document.querySelector(".filters");
 const position = document.querySelector(".position");
@@ -32,6 +33,11 @@ if(!players) {
 
 renderPlayers(players, IPLPlayersList);
 
+let fav = loadFav();
+
+if(!fav) renderSkeletonCards(favList, 6);
+
+renderFav(fav, favList);
 
 searchInput.addEventListener("input", debounce(async event => {
 
@@ -40,6 +46,10 @@ searchInput.addEventListener("input", debounce(async event => {
     try {
 
         const player = transformSearchPlayer(await searchPlayer(event.target.value));
+
+        players = [...players, player];
+
+        savePlayers(players);
 
         renderPlayer(player, searchResult);
 
@@ -63,17 +73,43 @@ clearSearchBtn.addEventListener("click", () => {
 
 
 let modals = loadModals();
-const modalHandler = async (event) => {
+const clickHandler = async (event) => {
 
-    if(!event.target.classList.contains("card")) return;
+    if(event.target.classList.contains("card__add-fav")) {
+
+        if(fav.find(player => player.playerID === event.target.closest(".card").dataset.id)) return;
+
+        fav = [...fav, players.find(player => player.playerID === event.target.closest(".card").dataset.id)];
+
+        saveFav(fav);
+
+        renderFav(fav, favList);
+
+        return;
+        
+    }
+
+    if(event.target.classList.contains("card__remove-fav")) {
+
+        fav = fav.filter(player => player.playerID !== event.target.closest(".card").dataset.id);
+
+        saveFav(fav);    
+
+        renderFav(fav, favList);
+
+        return;
+        
+    }
+
+    if(!event.target.closest(".card")) return;
 
     showModal();
 
     showSkeletonModal();
 
-    if(!modals.find(modal => modal.id === event.target.dataset.id)) {
+    if(!modals.find(modal => modal.id === event.target.closest(".card").dataset.id)) {
     
-        const playerDetails = transformLookUpPlayer(await lookUpPlayer(event.target.dataset.id));
+        const playerDetails = transformLookUpPlayer(await lookUpPlayer(event.target.closest(".card").dataset.id));
 
         modals = [...modals, playerDetails];
         
@@ -83,14 +119,15 @@ const modalHandler = async (event) => {
 
     hideSkeletonModal();
 
-    const modal = modals.find(modal => modal.id === event.target.dataset.id);
+    const modal = modals.find(modal => modal.id === event.target.closest(".card").dataset.id);
 
     populateModal(modal);
 
 };
 
-IPLPlayersList.addEventListener("click", modalHandler);
-searchResult.addEventListener("click", modalHandler);
+IPLPlayersList.addEventListener("click", clickHandler);
+searchResult.addEventListener("click", clickHandler);
+favList.addEventListener("click", clickHandler);
 
 modalCloseBtn.addEventListener("click", () => hideModal());
 
