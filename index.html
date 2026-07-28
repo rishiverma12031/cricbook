@@ -12,7 +12,7 @@
         <p class="header__title">Cricbook</p>
     </header>
     
-    <main>
+    <main class="main">
         
         <section class="search">
             <input class="search__input" type="text" id="player-search" placeholder="Search player">
@@ -24,19 +24,19 @@
         <div class="search__result"></div>
 
         <section class="IPL-players">
-            <div>
+            <div class="IPL-players__header">
                 <h2>IPL Players</h2>
                 <div class="filters-and-sorting">
                     <div class="filters">
                         <p>Filter by:<p>
-                        <select class="position" name="position">
+                        <select class="position dropdown" name="position">
                             <option value="all">-position-</option>
                             <option value="Batsman">Batsman</option>
                             <option value="Pace Bowler">Pace Bowler</option>
                             <option value="Wicket Keeper">Wicket keeper</option>
                             <option value="All-Rounder">All rounder</option>
                         </select>
-                        <select class="nationality" name="nationality">
+                        <select class="nationality dropdown" name="nationality">
                             <option value="all">-nationality-</option>
                             <option value="India">India</option>
                             <option value="Australia">Australia</option>
