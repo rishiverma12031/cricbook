@@ -32,9 +32,13 @@ export const renderPlayers = (players, container) => {
 
         const addFavBtn = document.createElement("button");
         addFavBtn.textContent = "Add to favorites";
-        addFavBtn.classList.add("card__add-fav", "button--primary");
+        addFavBtn.classList.add("button--card", "card__add-fav", "button--primary");
+        
+        const info = document.createElement("div");
+        info.classList.add("card__info");
 
-        card.append(image, name, nationality, position, team, addFavBtn);
+        info.append(name, nationality, position, team, addFavBtn);
+        card.append(image, info);
         container.append(card);        
  
     });
@@ -72,9 +76,13 @@ export const renderPlayer = (player, searchResult) => {
 
     const addFavBtn = document.createElement("button");
     addFavBtn.textContent = "Add to favorites";
-    addFavBtn.classList.add("card__add-fav", "button--primary");
+    addFavBtn.classList.add("button--card", "card__add-fav", "button--primary");
 
-    card.append(image, name, nationality, position, team, addFavBtn);
+    const info = document.createElement("div");
+    info.classList.add("card__info");
+
+    info.append(name, nationality, position, team, addFavBtn);
+    card.append(image, info);
     searchResult.append(card);
 
 };
@@ -123,9 +131,13 @@ export const renderFav = (players, container) => {
 
         const removeFavBtn = document.createElement("button");
         removeFavBtn.textContent = "Remove from favorites";
-        removeFavBtn.classList.add("card__remove-fav", "button--primary");
+        removeFavBtn.classList.add("button--card", "card__remove-fav", "button--primary");
 
-        card.append(image, name, nationality, position, team, removeFavBtn);
+        const info = document.createElement("div");
+        info.classList.add("card__info");
+
+        info.append(name, nationality, position, team, removeFavBtn);
+        card.append(image, info);
         container.append(card);
  
     });

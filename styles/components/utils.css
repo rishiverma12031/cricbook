@@ -1,4 +1,8 @@
 
+.hidden {
+    display: none;
+}
+
 .button--primary {
     padding: 0.5rem;
     background-color: var(--primary);
@@ -24,6 +28,11 @@
     transition: none;
 }
 
-.hidden {
-    display: none;
+.button--card {
+    background-color: var(--background);
+    color: var(--primary);
+}
+
+.button--card:hover {
+    background-color: color-mix(in oklch, var(--background), black 10%);
 }
