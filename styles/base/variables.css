@@ -1,7 +1,7 @@
 
 :root {
-    --text: black;
-    --background: white;
-    --primary: grey;
+    --text: #0f0e17;
+    --background: #fffffe;
+    --primary: #ff8906;
     font-family: sans-serif;
 }
