@@ -47,11 +47,13 @@ searchInput.addEventListener("input", debounce(async event => {
 
         const player = transformSearchPlayer(await searchPlayer(event.target.value));
 
+        renderPlayer(player, searchResult);
+
+        if(players.find(element => element.playerID === player.playerID)) return;
+
         players = [...players, player];
 
         savePlayers(players);
-
-        renderPlayer(player, searchResult);
 
     }
 
