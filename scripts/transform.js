@@ -18,6 +18,8 @@ export const transformFetchPlayers = (players) => {
 
 export const transformSearchPlayer = (player) => {
 
+    if(player === undefined) return;
+
     return {
         playerID: player.idPlayer,
         image: player.strThumb,

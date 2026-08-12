@@ -39,7 +39,9 @@ export const searchPlayer = async (player) => {
 
         const data = await response.json();
 
-        return data.player[0];
+        const filteredData = data.player?.filter(p => p.strSport === "Cricket");
+
+        return filteredData[0];
     
     }
 
