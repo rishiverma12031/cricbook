@@ -136,7 +136,7 @@ modalCloseBtn.addEventListener("click", () => hideModal());
 
 let filteredPlayers = players;
 
-filters.addEventListener("change", () => {
+filters.addEventListener("change", (event) => {
 
     if(!(event.target.classList.contains("position") || event.target.classList.contains("nationality"))) return;
 
@@ -150,7 +150,7 @@ filters.addEventListener("change", () => {
 
 })
 
-sort.addEventListener("click", () => {
+sort.addEventListener("click", (event) => {
 
     if(!event.target.classList.contains("button--primary")) return;
 
