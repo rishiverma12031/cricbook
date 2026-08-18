@@ -166,3 +166,14 @@ export const renderSkeletonCards = (container, count = 6) => {
     };
 
 };
+
+export const renderError = (container, message) => {
+    
+    container.innerHTML = "";
+
+    const error = document.createElement("p");
+    error.textContent = message;
+    
+    container.append(error);
+
+};

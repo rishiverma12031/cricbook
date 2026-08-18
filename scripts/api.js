@@ -20,6 +20,7 @@ export const fetchPlayers = async (id = 135796) => {
     catch(error) {
 
         console.error("Unable to fetch data: ", error);
+        return null;
 
     } 
 
@@ -48,6 +49,7 @@ export const searchPlayer = async (player) => {
     catch(error) {
 
         console.error("Unable to fetch data: ", error);
+        return null;
 
     }
 
@@ -74,6 +76,7 @@ export const lookUpPlayer = async (id) => {
     catch(error) {
 
         console.error("Unable to fetch data: ", error);
+        return null;
 
     }
 

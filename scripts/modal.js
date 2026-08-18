@@ -55,6 +55,14 @@ export const hideSkeletonModal = () => {
 
 export const populateModal = (modal) => {
 
+    if( typeof modal === "string" ) {
+
+        description.textContent = modal;
+
+        return;
+        
+    }
+
     name.textContent = modal.name;
     nationality.textContent = modal.nationality;
     dob.textContent = modal.dateOfBirth;

@@ -2,7 +2,7 @@
 import { fetchPlayers, searchPlayer, lookUpPlayer } from "./api.js";
 import { transformFetchPlayers, transformSearchPlayer, transformLookUpPlayer } from "./transform.js";
 import { loadPlayers, savePlayers, loadModals, saveModals, loadFav, saveFav } from "./storage.js";
-import { renderPlayers, renderPlayer, renderSkeletonCards, renderFav } from "./render.js";
+import { renderPlayers, renderPlayer, renderSkeletonCards, renderFav, renderError } from "./render.js";
 import { showModal, hideModal, showSkeletonModal, hideSkeletonModal, populateModal } from "./modal.js";
 import { debounce } from "./utils.js";
 import { showSpinner, hideSpinner } from "./spinner.js";
@@ -24,14 +24,27 @@ let players = loadPlayers();
 
 if(!players) {
     
-    renderSkeletonCards(IPLPlayersList, 6);
 
-    players = transformFetchPlayers(await fetchPlayers());
+    try {    
     
-    savePlayers(players);
-}
+        renderSkeletonCards(IPLPlayersList, 6);
 
-renderPlayers(players, IPLPlayersList);
+        players = transformFetchPlayers(await fetchPlayers());
+    
+        savePlayers(players);
+
+        renderPlayers(players, IPLPlayersList);
+    
+    }
+
+    catch {
+
+        renderError(IPLPlayersList, "Couldn't load players. Please try again.");
+
+    }
+                    
+
+}
 
 let fav = loadFav();
 
@@ -54,6 +67,12 @@ searchInput.addEventListener("input", debounce(async event => {
         players = [...players, player];
 
         savePlayers(players);
+
+    }
+
+    catch {
+
+        renderError(searchResult, "Couldn't find player. Please try again.");
 
     }
 
@@ -113,9 +132,23 @@ const clickHandler = async (event) => {
     
         const playerDetails = transformLookUpPlayer(await lookUpPlayer(event.target.closest(".card").dataset.id));
 
+        if(!playerDetails) {
+    
+            hideSkeletonModal();
+
+            populateModal("Couldn't load player details. Please try again.");
+
+            return;
+
+        }
+
+        else {
+
         modals = [...modals, playerDetails];
         
         saveModals(modals);
+
+        }
 
     }
 
