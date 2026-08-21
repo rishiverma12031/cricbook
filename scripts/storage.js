@@ -1,7 +1,17 @@
 
-export const loadPlayers = () => JSON.parse(localStorage.getItem("players"));
+export const loadPlayers = () => {
+    
+    const cached = JSON.parse(localStorage.getItem("players"))
 
-export const savePlayers = (players) => localStorage.setItem("players", JSON.stringify(players));
+    if(!cached) return null;
+
+    const isStale = Date.now() - cached.cachedAt > 24 * 60 * 60 * 1000;
+
+    return isStale ? null : cached.data;
+
+};
+
+export const savePlayers = (players) => localStorage.setItem("players", JSON.stringify({data: players, cachedAt: Date.now()}));
 
 export const loadModals = () => {
     
